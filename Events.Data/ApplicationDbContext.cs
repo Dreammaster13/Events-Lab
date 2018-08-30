@@ -18,5 +18,9 @@ namespace Events.Data
         {
             return new ApplicationDbContext();
         }
+
+        public IDbSet<Event> Events { get; set; }
+
+        public IDbSet<Comment> Comments { get; set; }
     }
 }
