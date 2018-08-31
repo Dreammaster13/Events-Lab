@@ -1,4 +1,5 @@
 ﻿using Events.Web.Models;
+using Microsoft.AspNet.Identity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,6 +27,22 @@ namespace Events.Web.Controllers
             });
         }
 
-        
+        public ActionResult EventDetailsById(int id)
+        {
+            var currentUserId = this.User.Identity.GetUserId();
+            var isAdmin = this.IsAdmin();
+            var eventDetails = this.db.Events
+                .Where(e => e.Id == id)
+                .Where(e => e.IsPublic || isAdmin || (e.AuthorId != null && e.AuthorId == currentUserId))
+                .Select(EventDetailsViewModel.ViewModel)
+                .FirstOrDefault();
+
+            var isOwner = (eventDetails != null && eventDetails.AuthorId != null &&
+                eventDetails.AuthorId == currentUserId);
+            this.ViewBag.CanEdit = isOwner || isAdmin;
+
+            return this.PartialView("_EventDetails", eventDetails);
+        }
+
     }
 }
