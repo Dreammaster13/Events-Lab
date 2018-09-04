@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Events.Data;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -26,5 +27,18 @@ namespace Events.Web.Models
 
         [Display(Name = "Is Public?")]
         public bool IsPublic { get; set; }
+
+        public static EventInputModel CreateFromEvent(Event e)
+        {
+            return new EventInputModel()
+            {
+                Title = e.Title,
+                StartDateTime = e.StartDateTime,
+                Duration = e.Duration,
+                Location = e.Location,
+                Description = e.Description,
+                IsPublic = e.IsPublic
+            };
+        }
     }
 }

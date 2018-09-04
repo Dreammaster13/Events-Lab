@@ -323,6 +323,8 @@
     <Content Include="Views\Events\My.cshtml" />
     <Content Include="Views\Shared\_Notifications.cshtml" />
     <Content Include="Views\Shared\_Events.cshtml" />
+    <Content Include="Views\Events\Edit.cshtml" />
+    <Content Include="Views\Events\_EventEditorForm.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Properties\" />
