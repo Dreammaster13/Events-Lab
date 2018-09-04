@@ -15,7 +15,15 @@ namespace Events.Web.Controllers
             var events = this.db.Events
                 .OrderBy(e => e.StartDateTime)
                 .Where(e => e.IsPublic)
-                .Select(EventViewModel.ViewModel);
+                .Select(e => new EventViewModel()
+            {
+                    Id = e.Id,
+                    Title = e.Title,
+                    StartDateTime = e.StartDateTime,
+                    Duration = e.Duration,
+                    Author = e.Author.FullName,
+                    Location = e.Location
+            });
                 
 
             var upcomingEvents = events.Where(e => e.StartDateTime > DateTime.Now);
@@ -27,6 +35,7 @@ namespace Events.Web.Controllers
             });
         }
 
+        //action that will return the event details when user click the [Viev Details] button
         public ActionResult EventDetailsById(int id)
         {
             var currentUserId = this.User.Identity.GetUserId();
