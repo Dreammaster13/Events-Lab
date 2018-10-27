@@ -1,6 +1,6 @@
 # Events-Lab
 
-Event Management Application
+:spiral_calendar: Event Management Application
 
 
 ## Introduction
